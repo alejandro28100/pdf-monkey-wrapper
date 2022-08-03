@@ -2,9 +2,9 @@
   "name": "pdf-monkey-node",
   "version": "1.0.0",
   "description": "PDFMonkey API wrapper",
-  "main": "./src/index.js",
+  "main": "./dist/index.js",
   "scripts": {
-    "start": "",
+    "start": "node --es-module-specifier-resolution=node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -17,5 +17,9 @@
   "devDependencies": {
     "@tsconfig/node16": "^1.0.3",
     "@types/node": "^18.6.3"
+  },
+  "type": "module",
+  "dependencies": {
+    "node-fetch": "^3.2.10"
   }
 }
