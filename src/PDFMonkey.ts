@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
 import { baseURL } from "./config";
-import { GetAccountDetailsResponse } from "./types/getAccountDetails";
+import { GetAccountDetailsResponse } from "./types/GetAccountDetails";
 
 interface PDFMonkey {
   getAccountDetails(): Promise<GetAccountDetailsResponse>;
@@ -11,6 +11,10 @@ class PDFMonkey {
     this.token = token;
   }
 
+  /**
+   * Returns the current user's account details.
+   * Useful to test the connection to the API.
+   */
   public async getAccountDetails(): Promise<GetAccountDetailsResponse> {
     const url = baseURL + "/current_user";
     const headers = {
