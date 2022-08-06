@@ -1,7 +1,8 @@
 import fetch from "node-fetch";
 import { baseURL } from "./config";
 import { GetAccountDetailsResponse } from "./types/GetAccountDetails";
-import { CreateDocumentResponse } from "./types/CreateDocument";
+import { GenerateDocumentResponse } from "./types/CreateDocument";
+import { FetchDocumentResponse } from "./types/FetchDocument";
 
 class PDFMonkey {
   constructor(public token: string) {
@@ -30,23 +31,10 @@ class PDFMonkey {
     }
   }
 
-  async createDocument(
+  /**Generates a document */
+  async generateDocument(
     /**ID of the source Template to use */
     templateId: string,
-
-    /**
-     *
-     * Can be one of:
-     *
-     * -draft
-     *
-     * -pending (default)
-     *
-     * To generate the Document,
-     * the status is set to pending. Doing so,
-     * the Document will be queued for generation directly.
-     */
-    status: "draft" | "pending",
     /**Data to use for the Document generation.
      * Can be either an Object or a string of JSON.
      * */
@@ -55,8 +43,8 @@ class PDFMonkey {
     /**Meta-Data to attach to the Document.
      * Can be either an Object or a string of JSON.
      */
-    metadata?: { [key: string]: any } | string
-  ): Promise<CreateDocumentResponse> {
+    metadata?: { _filename?: string; [key: string]: any } | string
+  ): Promise<GenerateDocumentResponse> {
     const url = baseURL + "/documents";
     const headers = {
       Authorization: `Bearer ${this.token}`,
@@ -64,7 +52,7 @@ class PDFMonkey {
     };
 
     try {
-      const response = await fetch(url, {
+      const options = {
         method: "POST",
         headers,
         body: JSON.stringify({
@@ -72,14 +60,49 @@ class PDFMonkey {
             document_template_id: templateId,
             meta: metadata,
             payload,
-            status,
+            status: "pending",
           },
         }),
-      });
-      const json = (await response.json()) as CreateDocumentResponse;
-      return Promise.resolve(json);
+      };
+      const response = await fetch(url, options);
+
+      if (response.ok) {
+        const { errors, document } =
+          (await response.json()) as GenerateDocumentResponse;
+
+        if (errors) {
+          return Promise.resolve({ errors, document: null });
+        }
+
+        let documentStatus = document.status;
+        let documentId = document.id;
+        let documentResult;
+
+        const getDocOptions = {
+          method: "GET",
+          headers,
+        };
+
+        while (documentStatus !== "success" && documentStatus !== "failure") {
+          const request = await fetch(url + "/" + documentId, getDocOptions);
+          const json = (await request.json()) as FetchDocumentResponse;
+          const { errors, document } = json;
+
+          if (errors) {
+            return Promise.resolve({ errors, document: null });
+          }
+          documentResult = document;
+          documentStatus = document.status;
+          documentId = document.id;
+        }
+        if (documentResult) {
+          return Promise.resolve({ document: documentResult, errors: null });
+        }
+      }
+
+      throw new Error("Document creation failed " + response.statusText);
     } catch (error) {
-      return Promise.reject(error);
+      return Promise.reject({ errors: error, document: null });
     }
   }
 }
