@@ -76,7 +76,7 @@ export interface Document {
   /**Represents the current status of the Documents. You can learn
    * more in the {@link https://docs.pdfmonkey.io/references/the-document-lifecycle#statuses Document Lifecycle documentation page}.
    */
-  status: string;
+  status: "draft" | "pending" | "success" | "failure" | "generating";
 
   /**Time at which the object was last updated. */
   updated_at: string;
