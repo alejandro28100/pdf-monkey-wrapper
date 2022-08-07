@@ -23,5 +23,16 @@
   "module": "./dist/esm/index.js",
   "dependencies": {
     "node-fetch": "^3.2.10"
-  }
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alejandro28100/pdf-monkey-node-client.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alejandro28100/pdf-monkey-node-client/issues"
+  },
+  "homepage": "https://github.com/alejandro28100/pdf-monkey-node-client#readme"
 }
