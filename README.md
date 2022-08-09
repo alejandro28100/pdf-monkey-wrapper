@@ -10,40 +10,63 @@ Install the package with:
 
 The package needs to be configured with your API secret key. This is avaiable in the [My account](https://dashboard.pdfmonkey.io/account) section.
 
-### Test your API KEY
+### CommonJS
 
-    const PDFMonkey = require("pdf-monkey-node");
+```javascript
+const PDFMonkey = (...args) =>
+  import("pdf-monkey-node").then(
+    ({ default: PDFMonkey }) => new PDFMonkey(...args)
+  );
 
-    const monkey = new PFDMonkey(SECRET_API_KEY);
+const API_TOKEN = "xxxxxxxxxxxxxxxx";
 
-    // Test your api key
-    monkey
-        .getAccountDetails()
-        .then( response => {
-            // print your account details
-            console.(response.current_user)
-        })
+(async () => {
+  const monkey = await PDFMonkey(API_TOKEN);
+
+  // test your API-KEY
+  const { errors, current_user } = await monkey.getAccountDetails();
+  console.log(current_user, errors);
+})();
+```
+
+### ES Modules
+
+```javascript
+import PDFMonkey from "pdf-monkey-node";
+
+const API_TOKEN = "xxxxxxxxxxxxxxxx";
+
+(async () => {
+  const monkey = new PDFMonkey(API_TOKEN);
+
+  // test your API-KEY
+  const { errors, current_user } = await monkey.getAccountDetails();
+  console.log(current_user, errors);
+})();
+```
 
 ### Generate a document
 
-    // pass your dynamic info
-    const payload = {
-    	user: {
-    		firstName: "John",
-    		lastName:"Doe"
-    	}
-    }
+```javascript
+const DOCUMENT_TEMPLATE_ID = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXX";
 
-    //Set the document name or other metadata
-    const meta = {
-    	_filename:"test.pdf",
-    	customerId: "1985782"
-    }
+// pass your dynamic info
+const payload = {
+  user: {
+    firstName: "John",
+    lastName: "Doe",
+  },
+};
 
-    // call the generateDocument method
-    monkey
-    	.generateDocument(TEMPLATE_ID, payload, meta)
-    	.then( result => {
-    		// print the document url
-    		console.log(result.document.download_url)
-    	})
+//Set the document name using the reserved field "_filename" or other metadata
+const meta = {
+  _filename: "test.pdf",
+  customerId: "1985782",
+};
+
+// call the generateDocument method
+monkey.generateDocument(TEMPLATE_ID, payload, meta).then((result) => {
+  // print the document url
+  console.log(result.document.download_url);
+});
+```
