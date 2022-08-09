@@ -1,6 +1,6 @@
 {
   "name": "pdf-monkey-wrapper",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "PDFMonkey API wrapper",
   "scripts": {
     "build": "tsc -p tsconfig.json",
@@ -25,10 +25,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alejandro28100/pdf-monkey-node-client.git"
+    "url": "git+https://github.com/alejandro28100/pdf-monkey-wrapper.git"
   },
   "bugs": {
-    "url": "https://github.com/alejandro28100/pdf-monkey-node-client/issues"
+    "url": "https://github.com/alejandro28100/pdf-monkey-wrapper/issues"
   },
-  "homepage": "https://github.com/alejandro28100/pdf-monkey-node-client#readme"
+  "homepage": "https://github.com/alejandro28100/pdf-monkey-wrapper#readme"
 }
