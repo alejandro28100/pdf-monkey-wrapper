@@ -4,7 +4,7 @@
 
 Install the package with:
 
-` npm i pdf-monkey-node`
+` npm i pdf-monkey-wrapper`
 
 ## Usage
 
