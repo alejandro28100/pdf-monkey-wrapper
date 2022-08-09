@@ -1,19 +1,8 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
-  "display": "Node 16",
+  "extends": "./tsconfig-base.json",
   "compilerOptions": {
-    "lib": ["ES2021"],
-    "module": "ESNext",
-    "target": "ES6",
-    "moduleResolution": "node",
-    "strict": true,
-    "outDir": "./dist",
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "allowSyntheticDefaultImports": true,
-    "declaration": true
-  },
-  "include": ["lib/**/*"],
-  "exclude": ["node_modules"]
+    "module": "esnext",
+    "outDir": "dist",
+    "target": "esnext"
+  }
 }

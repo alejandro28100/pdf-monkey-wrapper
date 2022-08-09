@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import { baseURL } from "./config";
+import { baseURL } from "./config.js";
 import { GetAccountDetailsResponse } from "./types/GetAccountDetails";
 import { GenerateDocumentResponse } from "./types/CreateDocument";
 import { FetchDocumentResponse } from "./types/FetchDocument";
