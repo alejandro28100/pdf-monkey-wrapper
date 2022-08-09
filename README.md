@@ -70,3 +70,7 @@ monkey.generateDocument(DOCUMENT_TEMPLATE_ID, payload, meta).then((result) => {
   console.log(result.document.download_url);
 });
 ```
+
+## Disclaimer
+
+This is not an official PDFMonkey client. It is a wrapper to simplify the usage of the PDFMonkey API. To see the official API documentation, please visit [https://pdfmonkey.io/docs](https://pdfmonkey.io/docs).
