@@ -8,7 +8,7 @@ Install the package with:
 
 ## Usage
 
-The package needs to be configured with your API secret key. This is avaiable in the [My account](https://dashboard.pdfmonkey.io/account) section.
+The package needs to be configured with your API secret key. This is available in the [My account](https://dashboard.pdfmonkey.io/account) section.
 
 ### CommonJS
 
