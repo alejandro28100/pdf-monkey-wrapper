@@ -1,5 +1,5 @@
 {
-  "name": "pdf-monkey-node",
+  "name": "pdf-monkey-wrapper",
   "version": "1.0.0",
   "description": "PDFMonkey API wrapper",
   "scripts": {
