@@ -1,6 +1,6 @@
 {
   "name": "pdf-monkey-wrapper",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "PDFMonkey API wrapper",
   "scripts": {
     "build": "tsc -p tsconfig.json",
