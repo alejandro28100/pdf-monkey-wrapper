@@ -65,7 +65,7 @@ const meta = {
 };
 
 // call the generateDocument method
-monkey.generateDocument(TEMPLATE_ID, payload, meta).then((result) => {
+monkey.generateDocument(DOCUMENT_TEMPLATE_ID, payload, meta).then((result) => {
   // print the document url
   console.log(result.document.download_url);
 });
