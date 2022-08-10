@@ -14,7 +14,7 @@ The package needs to be configured with your API secret key. This is available i
 
 ```javascript
 const PDFMonkey = (...args) =>
-  import("pdf-monkey-node").then(
+  import("pdf-monkey-wrapper").then(
     ({ default: PDFMonkey }) => new PDFMonkey(...args)
   );
 
@@ -32,7 +32,7 @@ const API_TOKEN = "xxxxxxxxxxxxxxxx";
 ### ES Modules
 
 ```javascript
-import PDFMonkey from "pdf-monkey-node";
+import PDFMonkey from "pdf-monkey-wrapper";
 
 const API_TOKEN = "xxxxxxxxxxxxxxxx";
 
